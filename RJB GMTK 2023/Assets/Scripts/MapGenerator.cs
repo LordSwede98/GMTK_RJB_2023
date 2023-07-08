@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    //references to tiles
     public GameObject[] prefabs;
     public MapTile[,] mapTiles;
-    public float spacing;
 
-    public int gridX, gridY;
+    //grid spawning variables
+    public float spacing, randomisedPositionRange;
+    public int gridX, gridY, randomPathX, randomPathY;
 
     void Start()
     {
         mapTiles = new MapTile[gridX,gridY];
+
+        randomPathX = Random.Range(1, gridX - 2);
+        randomPathY = Random.Range(1, gridY - 2);
 
         SpawnGrid();
     }
@@ -27,9 +32,9 @@ public class MapGenerator : MonoBehaviour
                 //generate a spawn position in the grid based on the position in the loop and the spacing between tiles on the grid
                 Vector3 spawnPosition = new Vector3(x * spacing, y * spacing, 0);
 
-                //then spawn an object if the position isn't in the middle of either row to give the map some separation
-                if(x != (gridX/2) && y != (gridY/2))
-                    SpawnObject(spawnPosition, Quaternion.identity, x, y);
+                //then spawn an object if the position isn't in the middle of either row or the random paths to give the map some separation
+                if (x != (gridX / 2) && y != (gridY / 2) && x != randomPathX && y != randomPathY)
+                    SpawnObject(RandomizePosition(spawnPosition), Quaternion.identity, x, y);
             }
         }
     }
@@ -44,5 +49,12 @@ public class MapGenerator : MonoBehaviour
         //once the object is spawned, add it to the map tiles 3D array and set it as a child item of this object
         mapTiles[_x, _y] = spawnedObject.GetComponent<MapTile>();
         mapTiles[_x, _y].transform.SetParent(this.transform);
+    }
+
+    Vector3 RandomizePosition(Vector3 _position)
+    {
+        Vector3 randomizedPosition = new Vector3(Random.Range(-randomisedPositionRange, randomisedPositionRange), Random.Range(-randomisedPositionRange, randomisedPositionRange), 0) + _position;
+
+        return randomizedPosition;
     }
 }

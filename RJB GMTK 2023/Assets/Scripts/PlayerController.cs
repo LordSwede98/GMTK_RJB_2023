@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
         //Movement
         rb.MovePosition(rb.position + Movement * playerMoveSpeed * Time.fixedDeltaTime);
 
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         //Rotation - Please don't ask me how this works.
         Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 Direction = MousePosition - transform.position;

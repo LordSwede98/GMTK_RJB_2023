@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,13 +16,17 @@ public class TimerAndScoreController : MonoBehaviour
 
     bool _timerRunning = false;
 
+    bool _countdown = true;
+
     GameController _controller;
+
+    public Action<int> EndOfTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         _score = 0;
-        _timeRemaining = 300;
+        //_timeRemaining = 300;
         _controller = GameController.Instance;
     }
 
@@ -30,24 +35,40 @@ public class TimerAndScoreController : MonoBehaviour
     {
         if (_timerRunning)
         {
-            if (_timeRemaining > 0)
+            if (_countdown)
             {
-                _timeRemaining -= Time.deltaTime;
-                DisplayTime(_timeRemaining);
+                if (_timeRemaining > 0)
+                {
+                    _timeRemaining -= Time.deltaTime;
+                    DisplayTime(_timeRemaining);
+                }
+                else
+                {
+                    _timeRemaining = 0;
+                    TimerEnded();
+                }
             }
             else
             {
-                _timeRemaining = 0;
-                _timerRunning = false;
-                Debug.Log("TimerFinished");
-                _controller.EndGame(_score);
+                _timeRemaining += Time.deltaTime;
+                DisplayTime(_timeRemaining);
             }
         }
     }
 
-    public void StartTimer()
+    public void TimerEnded()
+    {
+        _timerRunning = false;
+        Debug.Log("TimerFinished");
+        EndOfTimer?.Invoke(_score);
+    }
+
+    public void StartTimer(float startTime, bool countdown, Action<int> endTimerAction)
     {
         _timerRunning = true;
+        _countdown = countdown;
+        _timeRemaining = startTime;
+        EndOfTimer = endTimerAction;
     }
 
     void DisplayTime(float currentTimeValue)

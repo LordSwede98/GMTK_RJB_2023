@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
         TimerScoreController.StartTimer(0, false, EndSecondPhase);
         //_playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
     }
-
+    
     public void EndFirstPhase(int finalScore)
     {
         StartSecondPhase();

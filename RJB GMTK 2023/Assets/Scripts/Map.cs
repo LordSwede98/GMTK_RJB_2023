@@ -43,6 +43,12 @@ public class Map : MonoBehaviour
             SpreadFire();
     }
 
+    void Update()
+    {
+        if (GameController.Instance._phase == GameController.Phase.WaterPhase && TilesOnFire.Count == 0)
+            GameController.Instance.TimerScoreController.TimerEnded();
+    }
+
     //Spawn a grid of a given size and loop through each cell, spawning a random object at each
     void SpawnGrid()
     {
@@ -214,8 +220,8 @@ public class Map : MonoBehaviour
         return gridY * spacing;
     }
 
-    public Vector2 CenterPosition()
+    public Vector3 CenterPosition()
     {
-        return new Vector2((GridWidth() / 2) - (spacing / 2), (GridHeight() / 2) - (spacing / 2));
+        return new Vector3((GridWidth() / 2) - (spacing / 2), (GridHeight() / 2) - (spacing / 2), - 1);
     }
 }

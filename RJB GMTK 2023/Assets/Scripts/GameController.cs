@@ -5,16 +5,20 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab;
+    [SerializeField] Map _mapPrefab;
     
     public static GameController Instance { get; private set; }
 
-    public TimerAndScoreController TimerAndScoreController { get; private set; }
+    public TimerAndScoreController TimerScoreController { get; private set; }
+    public Map MapReference { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        TimerAndScoreController = Instantiate(_timeAndScoreControllerPrefab);
+        TimerScoreController = Instantiate(_timeAndScoreControllerPrefab);
+        MapReference = Instantiate(_mapPrefab);
+        StartGame();
     }
 
     // Update is called once per frame
@@ -23,9 +27,14 @@ public class GameController : MonoBehaviour
         
     }
 
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
     public void StartGame()
     {
-        
+        TimerScoreController.StartTimer();
     }
 
     public void EndGame(int finalScore)

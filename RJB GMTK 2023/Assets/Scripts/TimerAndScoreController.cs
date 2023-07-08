@@ -21,7 +21,7 @@ public class TimerAndScoreController : MonoBehaviour
     void Start()
     {
         _score = 0;
-        _timeRemaining = 30;
+        _timeRemaining = 300;
         _controller = GameController.Instance;
     }
 
@@ -34,7 +34,6 @@ public class TimerAndScoreController : MonoBehaviour
             {
                 _timeRemaining -= Time.deltaTime;
                 DisplayTime(_timeRemaining);
-                IncreaseScore(1);
             }
             else
             {

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab;
-    [SerializeField] Map _mapPrefab;
-    [SerializeField] Transform _playerController;
+    [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab = null;
+    [SerializeField] Map _mapPrefab = null;
+    [SerializeField] Transform _playerController = null;
     
     public enum Phase { FirePhase, WaterPhase };
 
@@ -29,7 +29,11 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //TESTING CODE
+        if(Input.GetKeyDown(KeyCode.Space) && _phase == Phase.WaterPhase)
+        {
+            TimerScoreController.TimerEnded();
+        }
     }
 
     private void OnDestroy()
@@ -48,7 +52,7 @@ public class GameController : MonoBehaviour
     {
         _phase = Phase.WaterPhase;
         TimerScoreController.StartTimer(0, false, EndSecondPhase);
-        _playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
+        //_playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
     }
 
     public void EndFirstPhase(int finalScore)

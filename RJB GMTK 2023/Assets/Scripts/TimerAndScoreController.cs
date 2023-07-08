@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TimerAndScoreController : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _scoreText;
+    [SerializeField] TextMeshProUGUI _scoreText = null;
 
-    [SerializeField] TextMeshProUGUI _timerText;
+    [SerializeField] TextMeshProUGUI _timerText = null;
     
     int _score;
 

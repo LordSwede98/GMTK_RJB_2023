@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab = null;
     [SerializeField] Map _mapPrefab = null;
     [SerializeField] Transform _playerController = null;
+    public AudioSource fire;
+    public AudioSource water;
     
     public enum Phase { FirePhase, WaterPhase };
 
@@ -58,6 +60,8 @@ public class GameController : MonoBehaviour
     public void EndFirstPhase(int finalScore)
     {
         StartSecondPhase();
+        fire.mute = true;
+        water.mute = false;
     }
 
     public void EndSecondPhase(int finalScore)

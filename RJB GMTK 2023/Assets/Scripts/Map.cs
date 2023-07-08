@@ -14,7 +14,7 @@ public class Map : MonoBehaviour
 
     //grid spawning variables
     public float spacing, randomisedPositionRange, fireTimer, spreadTime;
-    public int gridX, gridY, randomPathX, randomPathY, itemIndex;
+    public int gridX, gridY, randomPathX1, randomPathX2, randomPathY1, randomPathY2, itemIndex;
 
     void Start()
     {
@@ -23,8 +23,10 @@ public class Map : MonoBehaviour
         TilesOnFire = new List<MapTile>();
 
         //generate a random position for a path on the X and Y axis
-        randomPathX = Random.Range(1, gridX - 2);
-        randomPathY = Random.Range(1, gridY - 2);
+        randomPathX1 = Random.Range(1, gridX - 2);
+        randomPathX2 = Random.Range(1, gridX - 2);
+        randomPathY1 = Random.Range(1, gridY - 2);
+        randomPathY2 = Random.Range(1, gridY - 2);
 
         //spawn the tiles on the grid
         SpawnGrid();
@@ -52,7 +54,7 @@ public class Map : MonoBehaviour
                 Vector3 spawnPosition = new Vector3(x * spacing, y * spacing, 0);
 
                 //if we aren't at any of the path coordinates, then we want the item index to be above 0 and the position to be randomised. Otherwise we set item index to 0 to spawn a path
-                if (x != (gridX / 2) && y != (gridY / 2) && x != randomPathX && y != randomPathY)
+                if (x != (gridX / 2) && y != (gridY / 2) && x != randomPathX1 && x != randomPathX2 && y != randomPathY1 && y != randomPathY2)
                 {
                     itemIndex = Random.Range(1, prefabs.Length);
                     spawnPosition = RandomizePosition(spawnPosition);
@@ -112,6 +114,7 @@ public class Map : MonoBehaviour
                 switch (tilesToSpreadTo)
                 {
                     case 1:
+                    case 4:
                         {
                             //if there is only one tile to spread fire to, randomly choose a tile from the possible neighbours
                             neighboursToCatchFire.Add(spreadableNeighbours[(Random.Range(0, spreadableNeighbours.Count))]);
@@ -159,12 +162,12 @@ public class Map : MonoBehaviour
                             neighboursToCatchFire.Add(spreadableNeighbours[thirdTile]);
                         }
                         break;
-                    case 4:
+                    /*case 4:
                         {
                             //if there are four tiles to spread to, that means that all possible available neighbours need to catch fire, so add them all to the list
                             neighboursToCatchFire = spreadableNeighbours;
                         }
-                        break;
+                        break;*/
                 }
 
                 //now we have the list of neighbours to set fire to, loop through the list

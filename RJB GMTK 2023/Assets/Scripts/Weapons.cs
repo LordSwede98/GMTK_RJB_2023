@@ -8,8 +8,8 @@ public class Weapons : MonoBehaviour
     public GameObject FireProjectile;
     public GameObject WaterProjectile;
     public GameObject player;
-    public int FlamethrowerFireRate = 10;
-    public int WaterCannonFireRate = 10;
+    public int FlamethrowerFireRate = 5;
+    public int WaterCannonFireRate = 5;
 
     private int Delay;
 

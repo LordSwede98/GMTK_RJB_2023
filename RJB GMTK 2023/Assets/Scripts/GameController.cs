@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         //TESTING CODE
-        if(Input.GetKeyDown(KeyCode.Space) && _phase == Phase.WaterPhase)
+        if(Input.GetKeyDown(KeyCode.Z) && _phase == Phase.WaterPhase)
         {
             TimerScoreController.TimerEnded();
         }
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
     {
         _phase = Phase.FirePhase;
         TimerScoreController.StartTimer(30, true, EndFirstPhase);
-        _playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
+        _playerController.position = MapReference.CenterPosition();
     }
 
     public void StartSecondPhase()

@@ -98,7 +98,7 @@ public class Map : MonoBehaviour
         //for each tile that is currently on fire, roll a random number with a 50/50 chance
         for(int j = 0; j < TilesOnFire.Count; j++)
         {
-            if(Random.Range(0, 9) <= 4)
+            if(Random.Range(0, 10) <= 2)
             {
                 //if the fire will spread, grab a list of all neighbours that fire could spread to
                 spreadableNeighbours = GetNeighbours(new Vector2(TilesOnFire[j].posX, TilesOnFire[j].posY));
@@ -171,7 +171,7 @@ public class Map : MonoBehaviour
                 foreach (Vector2 tilePosition in neighboursToCatchFire)
                 {
                     Debug.Log("Setting New Fire");
-                    mapTiles[(int)tilePosition.x, (int)tilePosition.y].onFire = true;
+                    mapTiles[(int)tilePosition.x, (int)tilePosition.y].SetAblaze(false);
                 }
             }
         }

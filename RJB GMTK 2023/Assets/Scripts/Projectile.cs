@@ -14,8 +14,8 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        survivalRate = 50;
-        expansionDelay = 20;
+        survivalRate = 40;
+        expansionDelay = 10;
     }
 
     // Update is called once per frame

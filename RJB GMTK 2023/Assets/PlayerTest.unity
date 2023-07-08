@@ -136,12 +136,12 @@ PrefabInstance:
     - target: {fileID: 4979776060703747262, guid: f3f3c8c28acd7084bb4e4928e95c6113,
         type: 3}
       propertyPath: FlamethrowerFireRate
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4979776060703747262, guid: f3f3c8c28acd7084bb4e4928e95c6113,
         type: 3}
       propertyPath: WaterCannonFireRate
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4979776060703747262, guid: f3f3c8c28acd7084bb4e4928e95c6113,
         type: 3}

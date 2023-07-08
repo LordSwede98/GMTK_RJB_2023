@@ -111,9 +111,11 @@ MonoBehaviour:
   onFire: 0
   path: 0
   burnTime: 10
-  score: 0
+  score: 50
   posX: 0
   posY: 0
+  mesh: {fileID: 6433788231143357872}
+  _collider: {fileID: 0}
   fireSprite: {fileID: 7368775240116057485}
 --- !u!65 &6536757310199606047
 BoxCollider:

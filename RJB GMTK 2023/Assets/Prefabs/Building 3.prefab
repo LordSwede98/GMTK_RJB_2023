@@ -106,3 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2d0a84b9e67ea48a0ecc05f4583542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onFire: 0
+  burnTime: 30
+  score: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapTile : MonoBehaviour
 {
-    bool onFire = false;
-    float burnTime, score;
+    public bool onFire = false;
+    public bool path = false;
+    public float burnTime, score;
 }

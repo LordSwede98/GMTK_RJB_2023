@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject WaterCannon;
+    public GameObject FireCannon;
+    public GameObject FireProjectile;
+    public GameObject WaterProjectile;
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetButton("Fire1"))
     }
 }

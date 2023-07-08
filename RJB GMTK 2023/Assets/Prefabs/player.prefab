@@ -254,11 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab42599fc19acb4eac6f9d57829bf6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 2587645652480305491}
+  firePoint: {fileID: 2639820196245430288}
   FireProjectile: {fileID: 855794742782955861, guid: 9a7160293f5da6843a0d9ad77d64164e,
     type: 3}
   WaterProjectile: {fileID: 338846063213673800, guid: 2dc695653c8646f41bf35e0510bdcc0b,
     type: 3}
+  player: {fileID: 5853825676742928296}
   FlamethrowerFireRate: 20
   WaterCannonFireRate: 20
 --- !u!1 &6229038132681877661

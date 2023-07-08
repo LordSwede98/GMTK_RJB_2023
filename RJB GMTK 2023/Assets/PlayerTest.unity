@@ -143,6 +143,16 @@ PrefabInstance:
       propertyPath: WaterCannonFireRate
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4979776060703747262, guid: f3f3c8c28acd7084bb4e4928e95c6113,
+        type: 3}
+      propertyPath: FlameFireSpeed
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979776060703747262, guid: f3f3c8c28acd7084bb4e4928e95c6113,
+        type: 3}
+      propertyPath: WaterFireSpeed
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 5853825676742928296, guid: f3f3c8c28acd7084bb4e4928e95c6113,
         type: 3}
       propertyPath: m_Name

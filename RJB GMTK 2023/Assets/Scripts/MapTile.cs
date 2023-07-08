@@ -8,27 +8,26 @@ public class MapTile : MonoBehaviour
     public bool path = false;
     public float burnTime, score;
     public int posX, posY;
-    float burnProgress;
+    public MeshRenderer mesh;
+    public BoxCollider _collider;
+    float burning;
 
     public GameObject fireSprite;
 
+    private void Start()
+    {
+        burning = burnTime;
+    }
+
     private void Update()
     {
-        //if this tile is on fire and hasn't been added to the list of tiles on fire, add it to the list
-        //if (onFire && !GetComponentInParent<Map>().TilesOnFire.Contains(this))
-        //{
-        //    GetComponentInParent<Map>().TilesOnFire.Add(this);
-        //    fireSprite.SetActive(true);
-        //}
-        ////otherwise if the tile isn't on fire and is in the list of tiles on fire, remove it from the list
-        //else if (!onFire && GetComponentInParent<Map>().TilesOnFire.Contains(this))
-        //{
-        //    GetComponentInParent<Map>().TilesOnFire.Remove(this);
-        //    fireSprite.SetActive(false);
-        //}
         if (onFire && GameController.Instance._phase == GameController.Phase.WaterPhase)
         {
-
+            burning -= Time.deltaTime;
+            if(burning < 0)
+            {
+                DestroyHouse();
+            }
         }
     }
 
@@ -50,6 +49,10 @@ public class MapTile : MonoBehaviour
 
     public void SetAblaze(bool startBurning)
     {
+        if (GameController.Instance._phase == GameController.Phase.FirePhase && !onFire)
+        {
+            GameController.Instance.TimerScoreController.IncreaseScore(100);
+        }
         onFire = true;
         fireSprite.SetActive(true);
         if (!GetComponentInParent<Map>().TilesOnFire.Contains(this))
@@ -61,11 +64,23 @@ public class MapTile : MonoBehaviour
 
     public void Douse()
     {
+        if(onFire)
+        {
+            GameController.Instance.TimerScoreController.IncreaseScore(Mathf.FloorToInt(score * (burnTime - burning)));
+        }
         onFire = false;
         fireSprite.SetActive(false);
         if (GetComponentInParent<Map>().TilesOnFire.Contains(this))
         {
             GetComponentInParent<Map>().TilesOnFire.Remove(this);
         }
+    }
+
+    void DestroyHouse()
+    {
+        onFire = false;
+        Douse();
+        GameController.Instance.TimerScoreController.IncreaseScore(-100);
+        mesh.enabled = false;
     }
 }

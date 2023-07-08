@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     {
         //Movement
         rb.MovePosition(rb.position + Movement * playerMoveSpeed * Time.fixedDeltaTime);
-
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 

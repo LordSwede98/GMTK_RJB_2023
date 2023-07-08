@@ -74,4 +74,19 @@ public class Map : MonoBehaviour
 
         return randomizedPosition;
     }
+
+    public float GridWidth()
+    {
+        return gridX * spacing;
+    }
+
+    public float GridHeight()
+    {
+        return gridY * spacing;
+    }
+
+    public Vector2 CenterPosition()
+    {
+        return new Vector2((GridWidth() / 2) - (spacing / 2), (GridHeight() / 2) - (spacing / 2));
+    }
 }

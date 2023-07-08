@@ -93,6 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onFire: 0
-  path: 0
+  path: 1
   burnTime: 0
   score: 0
+  posX: 0
+  posY: 0
+  fireSprite: {fileID: 0}

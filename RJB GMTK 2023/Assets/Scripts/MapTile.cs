@@ -8,7 +8,7 @@ public class MapTile : MonoBehaviour
     public bool path = false;
     public float burnTime, score;
     public int posX, posY;
-    public MeshRenderer mesh;
+    public GameObject model;
     public BoxCollider _collider;
     float burning;
 
@@ -81,6 +81,7 @@ public class MapTile : MonoBehaviour
         onFire = false;
         Douse();
         GameController.Instance.TimerScoreController.IncreaseScore(-100);
-        mesh.enabled = false;
+        model.SetActive(false);
+        _collider.enabled = false;
     }
 }

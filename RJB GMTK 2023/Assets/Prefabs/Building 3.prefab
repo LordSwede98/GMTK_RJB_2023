@@ -147,8 +147,8 @@ MonoBehaviour:
   score: 10
   posX: 0
   posY: 0
-  mesh: {fileID: 0}
-  _collider: {fileID: 0}
+  model: {fileID: 5007976527130922770}
+  _collider: {fileID: 5044379236404871386}
   fireSprite: {fileID: 1149019943115250835}
 --- !u!65 &4231502502875014784
 BoxCollider:
@@ -247,6 +247,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9293d5cdce94d5c499c6886d91527b41, type: 3}
+--- !u!1 &5007976527130922770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9293d5cdce94d5c499c6886d91527b41,
+    type: 3}
+  m_PrefabInstance: {fileID: 5313827339945062979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5635191373814715816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9293d5cdce94d5c499c6886d91527b41,

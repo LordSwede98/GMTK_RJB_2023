@@ -102,4 +102,10 @@ public class TimerAndScoreController : MonoBehaviour
         _score += scoreValue;
         _scoreText.text = _score.ToString();
     }
+
+    public void ResetScore()
+    {
+        _score = 0;
+        _scoreText.text = _score.ToString();
+    }
 }

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] CutsceneController _openingPrefab = null;
     [SerializeField] CutsceneController _middlePrefab = null;
     [SerializeField] CutsceneController _endingPrefab = null;
+    [SerializeField] CutsceneController _badEndingPrefab = null;
     [SerializeField] GameObject _endingCanvas = null;
     [SerializeField] GameObject _goodEnding = null;
     [SerializeField] GameObject _badEnding = null;
@@ -95,8 +96,16 @@ public class GameController : MonoBehaviour
         finalScore = score;
         HideShowUI(false);
         _phase = Phase.CutscenePhase;
-        CutsceneController cutscene = Instantiate(_endingPrefab);
-        cutscene.StartCutscene(Ending);
+        if (score > 0)
+        {
+            CutsceneController cutscene = Instantiate(_endingPrefab);
+            cutscene.StartCutscene(Ending);
+        }
+        else
+        {
+            CutsceneController cutscene = Instantiate(_badEndingPrefab);
+            cutscene.StartCutscene(Ending);
+        }
         water.mute = true;
         endCutsceneAudio.mute = false;
         endCutsceneAudio.Play();
@@ -106,6 +115,16 @@ public class GameController : MonoBehaviour
     {
         _scoreText.text = "Final Score: \n" + finalScore; 
         _endingCanvas.SetActive(true);
+        if (finalScore > 0)
+        {
+            _goodEnding.SetActive(true);
+            _badEnding.SetActive(false);
+        }
+        else
+        {
+            _goodEnding.SetActive(false);
+            _badEnding.SetActive(true);
+        }
     }
     public void Menu()
     {
@@ -120,7 +139,7 @@ public class GameController : MonoBehaviour
 
         _endingCanvas.SetActive(false);
 
-        TimerScoreController._score = 0;
+        TimerScoreController.ResetScore();
 
         CutsceneController cutscene = Instantiate(_openingPrefab);
         cutscene.StartCutscene(StartFirstPhase);

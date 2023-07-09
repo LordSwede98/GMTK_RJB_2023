@@ -46,7 +46,9 @@ public class Map : MonoBehaviour
     void Update()
     {
         if (GameController.Instance._phase == GameController.Phase.WaterPhase && TilesOnFire.Count == 0)
+        {
             GameController.Instance.TimerScoreController.TimerEnded();
+        }
     }
 
     //Spawn a grid of a given size and loop through each cell, spawning a random object at each

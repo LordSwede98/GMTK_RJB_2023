@@ -7,10 +7,13 @@ public class GameController : MonoBehaviour
     [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab = null;
     [SerializeField] Map _mapPrefab = null;
     [SerializeField] Transform _playerController = null;
+    [SerializeField] CutsceneController _openingPrefab;
+    [SerializeField] CutsceneController _middlePrefab;
+    [SerializeField] CutsceneController _endingPrefab;
     public AudioSource fire;
     public AudioSource water;
     
-    public enum Phase { FirePhase, WaterPhase };
+    public enum Phase { FirePhase, WaterPhase, CutscenePhase };
 
     public static GameController Instance { get; private set; }
 
@@ -23,9 +26,11 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Instance = this;
-        TimerScoreController = Instantiate(_timeAndScoreControllerPrefab);
         MapReference = Instantiate(_mapPrefab);
-        StartFirstPhase();
+        TimerScoreController = Instantiate(_timeAndScoreControllerPrefab);
+        //StartFirstPhase();
+        CutsceneController cutscene = Instantiate(_openingPrefab);
+        cutscene.StartCutscene(StartFirstPhase);
     }
 
     // Update is called once per frame
@@ -59,7 +64,9 @@ public class GameController : MonoBehaviour
     
     public void EndFirstPhase(int finalScore)
     {
-        StartSecondPhase();
+        //StartSecondPhase();
+        CutsceneController cutscene = Instantiate(_middlePrefab);
+        cutscene.StartCutscene(StartSecondPhase);
         fire.mute = true;
         water.mute = false;
         water.Play();
@@ -67,6 +74,13 @@ public class GameController : MonoBehaviour
 
     public void EndSecondPhase(int finalScore)
     {
-        
+        _phase = Phase.CutscenePhase;
+        CutsceneController cutscene = Instantiate(_endingPrefab);
+        cutscene.StartCutscene(Ending);
+    }
+
+    public void Ending()
+    {
+
     }
 }

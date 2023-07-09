@@ -26,7 +26,7 @@ public class CutsceneController : MonoBehaviour
     {
         if (_timerRunning)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKey(KeyCode.JoystickButton1))
             {
                 SkipCutscene();
             }

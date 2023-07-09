@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _phase = Phase.CutscenePhase;
         Instance = this;
         MapReference = Instantiate(_mapPrefab);
         TimerScoreController = Instantiate(_timeAndScoreControllerPrefab);
@@ -65,6 +66,7 @@ public class GameController : MonoBehaviour
     public void EndFirstPhase(int finalScore)
     {
         //StartSecondPhase();
+        _phase = Phase.CutscenePhase;
         CutsceneController cutscene = Instantiate(_middlePrefab);
         cutscene.StartCutscene(StartSecondPhase);
         fire.mute = true;

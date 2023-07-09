@@ -9,6 +9,10 @@ public class TimerAndScoreController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _scoreText = null;
 
     [SerializeField] TextMeshProUGUI _timerText = null;
+
+    [SerializeField] Color _fireColor;
+
+    [SerializeField] Color _waterColor;
     
     public int _score;
 
@@ -69,6 +73,17 @@ public class TimerAndScoreController : MonoBehaviour
         _countdown = countdown;
         _timeRemaining = startTime;
         EndOfTimer = endTimerAction;
+
+        if(countdown)
+        {
+            _scoreText.color = _fireColor;
+            _timerText.color = _fireColor;
+        }
+        else
+        {
+            _scoreText.color = _waterColor;
+            _timerText.color = _waterColor;
+        }
     }
 
     void DisplayTime(float currentTimeValue)

@@ -12,7 +12,7 @@ public class MapTile : MonoBehaviour
     public BoxCollider _collider;
     float burning;
 
-    public GameObject fireSprite, minimapIcon;
+    public GameObject fireSprite, minimapIcon, minimapFireIcon;
 
     private void Start()
     {
@@ -55,7 +55,7 @@ public class MapTile : MonoBehaviour
         }
         onFire = true;
         fireSprite.SetActive(true);
-        minimapIcon.SetActive(true);
+        minimapFireIcon.SetActive(true);
         if (!GetComponentInParent<Map>().TilesOnFire.Contains(this))
         {
             Debug.Log("Added to Fire List");
@@ -71,7 +71,7 @@ public class MapTile : MonoBehaviour
         }
         onFire = false;
         fireSprite.SetActive(false);
-        minimapIcon.SetActive(false);
+        minimapFireIcon.SetActive(false);
         if (GetComponentInParent<Map>().TilesOnFire.Contains(this))
         {
             GetComponentInParent<Map>().TilesOnFire.Remove(this);
@@ -85,6 +85,7 @@ public class MapTile : MonoBehaviour
         GameController.Instance.TimerScoreController.IncreaseScore(-100);
         model.SetActive(false);
         minimapIcon.SetActive(false);
+        minimapFireIcon.SetActive(false);
         _collider.enabled = false;
     }
 }

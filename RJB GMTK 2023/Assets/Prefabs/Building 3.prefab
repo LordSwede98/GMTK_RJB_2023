@@ -152,7 +152,8 @@ MonoBehaviour:
   model: {fileID: 5007976527130922770}
   _collider: {fileID: 5044379236404871386}
   fireSprite: {fileID: 1997307785648278813}
-  minimapIcon: {fileID: 1149019943115250835}
+  minimapIcon: {fileID: 6477658351478913241}
+  minimapFireIcon: {fileID: 1149019943115250835}
 --- !u!65 &4231502502875014784
 BoxCollider:
   m_ObjectHideFlags: 0

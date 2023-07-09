@@ -617,7 +617,7 @@ MonoBehaviour:
     type: 3}
   _endingCanvas: {fileID: 1326836181}
   _goodEnding: {fileID: 1605418687}
-  _badEnding: {fileID: 904917970}
+  _badEnding: {fileID: 1328812397}
   _scoreText: {fileID: 2091969571}
   _minimap: {fileID: 1168406155}
   fire: {fileID: 428314592}
@@ -654,7 +654,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

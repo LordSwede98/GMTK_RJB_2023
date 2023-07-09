@@ -84,6 +84,7 @@ public class MapTile : MonoBehaviour
         Douse();
         GameController.Instance.TimerScoreController.IncreaseScore(-100);
         model.SetActive(false);
+        minimapIcon.SetActive(false);
         _collider.enabled = false;
     }
 }

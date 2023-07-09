@@ -5635,7 +5635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Extra
+  m_text: 'Extras
 
 '
   m_isRightToLeft: 0
@@ -5707,7 +5707,7 @@ MonoBehaviour:
   m_margin: {x: 40.63849, y: 0, z: 34.490677, w: 7.719786}
   m_textInfo:
     textComponent: {fileID: 1495005433}
-    characterCount: 6
+    characterCount: 7
     spriteCount: 0
     spaceCount: 1
     wordCount: 1

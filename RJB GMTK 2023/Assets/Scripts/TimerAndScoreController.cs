@@ -10,7 +10,7 @@ public class TimerAndScoreController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI _timerText = null;
     
-    int _score;
+    public int _score;
 
     float _timeRemaining;
 

@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab = null;
     [SerializeField] Map _mapPrefab = null;
     [SerializeField] Transform _playerController = null;
-    [SerializeField] CutsceneController _openingPrefab;
-    [SerializeField] CutsceneController _middlePrefab;
-    [SerializeField] CutsceneController _endingPrefab;
+    [SerializeField] CutsceneController _openingPrefab = null;
+    [SerializeField] CutsceneController _middlePrefab = null;
+    [SerializeField] CutsceneController _endingPrefab = null;
+    [SerializeField] GameObject _endingCanvas = null;
+    [SerializeField] GameObject _goodEnding = null;
+    [SerializeField] GameObject _badEnding = null;
+    [SerializeField] TextMeshProUGUI _scoreText = null;
     public AudioSource fire;
     public AudioSource water;
     public AudioSource endCutsceneAudio;
@@ -23,6 +29,8 @@ public class GameController : MonoBehaviour
     public Map MapReference { get; private set; }
 
     public Phase _phase;
+
+    int finalScore;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +99,24 @@ public class GameController : MonoBehaviour
 
     public void Ending()
     {
+        finalScore = TimerScoreController._score;
+        _scoreText.text = "Final Score: \n" + finalScore; 
+        _endingCanvas.SetActive(true);
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
+    public void Replay()
+    {
+        Destroy(MapReference.gameObject);
+        MapReference = null;
+        MapReference = Instantiate(_mapPrefab);
+
+        _endingCanvas.SetActive(false);
+
+        CutsceneController cutscene = Instantiate(_openingPrefab);
+        cutscene.StartCutscene(StartFirstPhase);
     }
 }

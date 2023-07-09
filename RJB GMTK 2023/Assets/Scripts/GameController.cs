@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
         StartSecondPhase();
         fire.mute = true;
         water.mute = false;
+        water.Play();
     }
 
     public void EndSecondPhase(int finalScore)

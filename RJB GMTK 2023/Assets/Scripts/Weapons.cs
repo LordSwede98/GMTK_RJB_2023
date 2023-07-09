@@ -10,7 +10,7 @@ public class Weapons : MonoBehaviour
     public GameObject player;
     public int FlamethrowerFireRate = 5;
     public int WaterCannonFireRate = 5;
-    public float firingPenaltyModifier = 0.5f;
+    public float firingPenaltyModifier = 0.75f;
     private int Delay;
 
     void FixedUpdate()

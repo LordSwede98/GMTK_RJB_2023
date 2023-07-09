@@ -15,7 +15,7 @@ public class Weapons : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") || Input.GetAxis("Right Trigger") > 0)
         {
             if (GameController.Instance._phase == GameController.Phase.FirePhase) //Flamethrower firing code starts here
             {

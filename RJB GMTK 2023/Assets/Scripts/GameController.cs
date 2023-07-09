@@ -12,7 +12,8 @@ public class GameController : MonoBehaviour
     [SerializeField] CutsceneController _endingPrefab;
     public AudioSource fire;
     public AudioSource water;
-    public AudioSource cutsceneAudio;
+    public AudioSource endCutsceneAudio;
+    public AudioSource midCutsceneAudio;
     
     public enum Phase { FirePhase, WaterPhase, CutscenePhase };
 
@@ -61,7 +62,7 @@ public class GameController : MonoBehaviour
     {
         _phase = Phase.WaterPhase;
         TimerScoreController.StartTimer(0, false, EndSecondPhase);
-        cutsceneAudio.mute = true;
+        midCutsceneAudio.mute = true;
         water.mute = false;
         water.Play();
         //_playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
@@ -74,8 +75,8 @@ public class GameController : MonoBehaviour
         CutsceneController cutscene = Instantiate(_middlePrefab);
         cutscene.StartCutscene(StartSecondPhase);
         fire.mute = true;
-        cutsceneAudio.Play();
-        cutsceneAudio.mute = false;
+        midCutsceneAudio.Play();
+        midCutsceneAudio.mute = false;
     }
 
     public void EndSecondPhase(int finalScore)
@@ -84,7 +85,8 @@ public class GameController : MonoBehaviour
         CutsceneController cutscene = Instantiate(_endingPrefab);
         cutscene.StartCutscene(Ending);
         water.mute = true;
-        cutsceneAudio.mute = false;
+        endCutsceneAudio.mute = false;
+        endCutsceneAudio.Play();
     }
 
     public void Ending()

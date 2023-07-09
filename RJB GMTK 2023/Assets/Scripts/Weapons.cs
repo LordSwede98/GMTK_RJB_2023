@@ -20,10 +20,12 @@ public class Weapons : MonoBehaviour
             if (GameController.Instance._phase == GameController.Phase.FirePhase) //Flamethrower firing code starts here
             {
                 Firing("Fire", FlamethrowerFireRate);
+                //fireParticles.SetActive(true);
             }
             else if (GameController.Instance._phase == GameController.Phase.WaterPhase) //Water cannon firing code starts here
             {
                 Firing("Water", WaterCannonFireRate);
+                //waterParticles.SetActive(true);
             }
             else //Only errors out if it can't find the global game phase
             {
@@ -34,6 +36,8 @@ public class Weapons : MonoBehaviour
         else
         {
             Delay = 0;
+            //fireParticles.SetActive(false);
+            //waterParticles.SetActive(false);
         }
     }
 

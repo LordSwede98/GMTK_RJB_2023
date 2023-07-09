@@ -26,21 +26,29 @@ public class CutsceneController : MonoBehaviour
     {
         if (_timerRunning)
         {
-            if (_timeRemaining > 0)
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                _timeRemaining -= Time.deltaTime;
+                SkipCutscene();
             }
             else
             {
-                _index += 1;
-                if (_index == _slides.Length)
+                if (_timeRemaining > 0)
                 {
-                    EndOfCutscene?.Invoke();
-                    Destroy(gameObject);
+                    _timeRemaining -= Time.deltaTime;
                 }
                 else
                 {
-                    ShowCurrentIndexSlide();
+                    _index += 1;
+                    if (_index == _slides.Length)
+                    {
+                        _timerRunning = false;
+                        EndOfCutscene?.Invoke();
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        ShowCurrentIndexSlide();
+                    }
                 }
             }
         }
@@ -68,5 +76,12 @@ public class CutsceneController : MonoBehaviour
         EndOfCutscene = endAction;
         _timerRunning = true;
         ShowCurrentIndexSlide();
+    }
+
+    void SkipCutscene()
+    {
+        _timerRunning = false;
+        EndOfCutscene?.Invoke();
+        Destroy(gameObject);
     }
 }

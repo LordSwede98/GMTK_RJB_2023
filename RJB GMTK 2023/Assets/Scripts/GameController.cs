@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] TimerAndScoreController _timeAndScoreControllerPrefab = null;
     [SerializeField] Map _mapPrefab = null;
     [SerializeField] Transform _playerController = null;
-    [SerializeField] CutsceneController _openingPrefab;
-    [SerializeField] CutsceneController _middlePrefab;
-    [SerializeField] CutsceneController _endingPrefab;
+    [SerializeField] CutsceneController _openingPrefab = null;
+    [SerializeField] CutsceneController _middlePrefab = null;
+    [SerializeField] CutsceneController _endingPrefab = null;
+    [SerializeField] GameObject _endingCanvas = null;
+    [SerializeField] GameObject _goodEnding = null;
+    [SerializeField] GameObject _badEnding = null;
+    [SerializeField] TextMeshProUGUI _scoreText = null;
+    [SerializeField] GameObject _minimap = null;
     public AudioSource fire;
     public AudioSource water;
     public AudioSource endCutsceneAudio;
@@ -24,6 +31,8 @@ public class GameController : MonoBehaviour
 
     public Phase _phase;
 
+    int finalScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +40,7 @@ public class GameController : MonoBehaviour
         Instance = this;
         MapReference = Instantiate(_mapPrefab);
         TimerScoreController = Instantiate(_timeAndScoreControllerPrefab);
+        HideShowUI(false);
         //StartFirstPhase();
         CutsceneController cutscene = Instantiate(_openingPrefab);
         cutscene.StartCutscene(StartFirstPhase);
@@ -53,6 +63,7 @@ public class GameController : MonoBehaviour
 
     public void StartFirstPhase()
     {
+        HideShowUI(true);
         _phase = Phase.FirePhase;
         TimerScoreController.StartTimer(30, true, EndFirstPhase);
         _playerController.position = MapReference.CenterPosition();
@@ -60,17 +71,17 @@ public class GameController : MonoBehaviour
 
     public void StartSecondPhase()
     {
+        HideShowUI(true);
         _phase = Phase.WaterPhase;
         TimerScoreController.StartTimer(0, false, EndSecondPhase);
         midCutsceneAudio.mute = true;
         water.mute = false;
         water.Play();
-        //_playerController.position = new Vector3(MapReference.GridWidth() / 2, MapReference.GridHeight() / 2, _playerController.position.z);
     }
     
-    public void EndFirstPhase(int finalScore)
+    public void EndFirstPhase(int score)
     {
-        //StartSecondPhase();
+        HideShowUI(false);
         _phase = Phase.CutscenePhase;
         CutsceneController cutscene = Instantiate(_middlePrefab);
         cutscene.StartCutscene(StartSecondPhase);
@@ -79,8 +90,10 @@ public class GameController : MonoBehaviour
         midCutsceneAudio.mute = false;
     }
 
-    public void EndSecondPhase(int finalScore)
+    public void EndSecondPhase(int score)
     {
+        finalScore = score;
+        HideShowUI(false);
         _phase = Phase.CutscenePhase;
         CutsceneController cutscene = Instantiate(_endingPrefab);
         cutscene.StartCutscene(Ending);
@@ -91,6 +104,35 @@ public class GameController : MonoBehaviour
 
     public void Ending()
     {
+        _scoreText.text = "Final Score: \n" + finalScore; 
+        _endingCanvas.SetActive(true);
+    }
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
+    public void Replay()
+    {
+        Destroy(MapReference.gameObject);
+        MapReference = null;
+        MapReference = Instantiate(_mapPrefab);
+
+        _endingCanvas.SetActive(false);
+
+        TimerScoreController._score = 0;
+
+        CutsceneController cutscene = Instantiate(_openingPrefab);
+        cutscene.StartCutscene(StartFirstPhase);
+        endCutsceneAudio.mute = true;
+        fire.Stop();
+        fire.Play();
+        fire.mute = false;
+    }
+
+    void HideShowUI(bool show)
+    {
+        TimerScoreController.gameObject.SetActive(show);
+        _minimap.SetActive(show);
     }
 }

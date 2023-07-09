@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     Vector3 Movement;
     float Rotation;
+    public float moveSpeedModifier { get; set; }
+
+    private void Start()
+    {
+        moveSpeedModifier = 1;
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if (GameController.Instance._phase != GameController.Phase.CutscenePhase)
         {
             //Movement
-            rb.MovePosition(rb.position + Movement * playerMoveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + Movement * playerMoveSpeed * Time.fixedDeltaTime * moveSpeedModifier);
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 

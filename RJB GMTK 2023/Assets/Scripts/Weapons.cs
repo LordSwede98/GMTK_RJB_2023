@@ -10,13 +10,14 @@ public class Weapons : MonoBehaviour
     public GameObject player;
     public int FlamethrowerFireRate = 5;
     public int WaterCannonFireRate = 5;
-
+    public float firingPenaltyModifier = 0.75f;
     private int Delay;
 
     void FixedUpdate()
     {
         if (Input.GetKey("space") || Input.GetAxis("Right Trigger") > 0)
         {
+            player.GetComponent<PlayerController>().moveSpeedModifier = firingPenaltyModifier; //Apply a movement penalty for firing,
             if (GameController.Instance._phase == GameController.Phase.FirePhase) //Flamethrower firing code starts here
             {
                 Firing("Fire", FlamethrowerFireRate);
@@ -36,6 +37,7 @@ public class Weapons : MonoBehaviour
         else
         {
             Delay = 0;
+            player.GetComponent<PlayerController>().moveSpeedModifier = 1; //resets the firing penalty, so movement should return to 1.
             //fireParticles.SetActive(false);
             //waterParticles.SetActive(false);
         }

@@ -118,5 +118,9 @@ public class GameController : MonoBehaviour
 
         CutsceneController cutscene = Instantiate(_openingPrefab);
         cutscene.StartCutscene(StartFirstPhase);
+        endCutsceneAudio.mute = true;
+        fire.Stop();
+        fire.Play();
+        fire.mute = false;
     }
 }
